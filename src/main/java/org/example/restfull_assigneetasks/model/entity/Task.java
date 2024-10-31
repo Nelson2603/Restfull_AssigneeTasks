@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Task {
-    @Id
+    @Id//здесь был Наиль
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
