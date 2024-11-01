@@ -24,7 +24,9 @@ public class Assignee {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "assignee",orphanRemoval = true)
+    @OneToMany(mappedBy = "assignee",orphanRemoval = true) //orphanRemoval = true  - сущности должны автоматически удалятся из бд,
+    // если они больше не связаны с родительской сущностью
+
     List<Task> tasks = new ArrayList<>();
 
 
