@@ -25,15 +25,8 @@ public class TaskController {
         }
     }
 
-    @PostMapping("/{assigneeId}")
-    public ResponseEntity<Task> createTask(@PathVariable Long assigneeId, @RequestBody Task task) {
-        Assignee assignee = assigneeService.getAssignee(assigneeId);
-
-        if (assignee == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        task.setAssignee(assignee);
+    @PostMapping("/new")
+    public ResponseEntity<Task> createTask( @RequestBody Task task) {
         Task createdTask = taskService.createTask(task);
         return ResponseEntity.ok(createdTask);
     }

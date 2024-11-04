@@ -15,7 +15,7 @@ public class AssigneeController {
     @Autowired
     private AssigneeService assigneeService;
 
-    @PostMapping("/newAssignee")//добавление нового Исполнителя
+    @PostMapping("/new")//добавление нового Исполнителя
     public ResponseEntity<Assignee> addAssignee(@RequestBody Assignee assignee) {
         assigneeService.addAssignee(assignee);
         return ResponseEntity.status(HttpStatus.CREATED).body(assignee);
