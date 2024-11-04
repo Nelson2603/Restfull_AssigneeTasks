@@ -29,7 +29,7 @@ public class TaskController {
         return assigneeService.getAssignee(assigneeId)
                 .map(assignee -> {
                     task.setAssignee(assignee);
-                    Task createdTask = taskService.saveTask(task);
+                    Task createdTask = taskService.createTask(task);
                     return ResponseEntity.ok(createdTask);
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
