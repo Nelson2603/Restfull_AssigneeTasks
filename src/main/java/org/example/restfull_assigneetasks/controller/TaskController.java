@@ -1,5 +1,6 @@
 package org.example.restfull_assigneetasks.controller;
 
+import org.example.restfull_assigneetasks.model.entity.Assignee;
 import org.example.restfull_assigneetasks.model.entity.Task;
 import org.example.restfull_assigneetasks.service.AssigneeService;
 import org.example.restfull_assigneetasks.service.TaskService;
@@ -26,14 +27,17 @@ public class TaskController {
 
     @PostMapping("/{assigneeId}")
     public ResponseEntity<Task> createTask(@PathVariable Long assigneeId, @RequestBody Task task) {
-        return assigneeService.getAssignee(assigneeId)
-                .map(assignee -> {
-                    task.setAssignee(assignee);
-                    Task createdTask = taskService.createTask(task);
-                    return ResponseEntity.ok(createdTask);
-                })
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        Assignee assignee = assigneeService.getAssignee(assigneeId);
+
+        if (assignee == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        task.setAssignee(assignee);
+        Task createdTask = taskService.createTask(task);
+        return ResponseEntity.ok(createdTask);
     }
+
 
 
 }
