@@ -6,4 +6,8 @@ public interface TaskService {
     Task createTask(Task task);
 
     Task readTask(long id);
+
+    Task updateTask(Task task);
+
+    void deleteTask(long id);
 }

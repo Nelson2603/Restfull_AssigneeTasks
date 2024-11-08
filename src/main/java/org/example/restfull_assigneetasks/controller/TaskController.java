@@ -15,22 +15,36 @@ public class TaskController {
     private TaskService taskService;
     private AssigneeService assigneeService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") //для получения задачи по ID.
     public ResponseEntity<Task> getTask(@PathVariable long id) {
         Task task = taskService.readTask(id);
         if (task != null) {
             return ResponseEntity.ok(task);
-        }else {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<Task> createTask( @RequestBody Task task) {
+    @PostMapping("/new") // для создания новой задачи.
+    public ResponseEntity<Task> createTask(@RequestBody Task task) {
         Task createdTask = taskService.createTask(task);
         return ResponseEntity.ok(createdTask);
     }
 
+    @PutMapping("/{id}")
+    ResponseEntity<Task> updateTask(@PathVariable long id, @RequestBody Task task) {  //для обновления существующей задачи.
+        task.setId(id);
+        Task updatedTask = taskService.updateTask(task);
+        if (updatedTask != null) {
+            return ResponseEntity.ok(updatedTask);
+        }
+        return ResponseEntity.notFound().build();
+    }
 
-
+    @DeleteMapping("/{id}")   //для удаления задачи по ID.
+    public ResponseEntity<Task> deleteTask(@PathVariable long id) {
+        taskService.deleteTask(id);
+        return ResponseEntity.noContent().build(); //noContent() - возвращает HTTP-ответ со статусом 204 No Content.
+        // Этот статус означает, что запрос был успешно обработан, но в ответе не содержится данных.
+    }
 }
