@@ -5,11 +5,11 @@ import org.example.restfull_assigneetasks.model.entity.Assignee;
 import org.example.restfull_assigneetasks.service.AssigneeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/assignees")
@@ -41,9 +41,9 @@ public class AssigneeController {
 
     @PutMapping("/{id}")//изменение данных
     public ResponseEntity<Assignee> updateAssignee(@PathVariable long id, @RequestBody Assignee assignee) {
-       return assigneeService.updateAssignee(id, assignee)
-               .map(ResponseEntity::ok)
-               .orElse(ResponseEntity.status(HttpStatus.NO_CONTENT).build());
+        return assigneeService.updateAssignee(id, assignee)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(HttpStatus.NO_CONTENT).build());
 
     }
 
@@ -55,4 +55,16 @@ public class AssigneeController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Assignee> partialUpdateAssignee(
+            @PathVariable Long id,
+            @RequestBody Assignee assignee) {
+
+        return assigneeService.partialUpdateAssignee(id, assignee)
+                .map(updatedAssignee -> ResponseEntity.ok().body(updatedAssignee))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }

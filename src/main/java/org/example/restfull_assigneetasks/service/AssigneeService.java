@@ -3,6 +3,7 @@ package org.example.restfull_assigneetasks.service;
 import org.example.restfull_assigneetasks.model.entity.Assignee;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface AssigneeService {
@@ -16,4 +17,5 @@ public interface AssigneeService {
 
     boolean deleteAssignee(Long id);//удаление исполнителя
 
+    Optional<Assignee> partialUpdateAssignee(Long id, Assignee assignee);
 }

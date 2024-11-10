@@ -1,11 +1,14 @@
 package org.example.restfull_assigneetasks.service;
 
+import jakarta.transaction.Transactional;
+import org.example.restfull_assigneetasks.exception.ResourceNotFoundException;
 import org.example.restfull_assigneetasks.model.entity.Assignee;
 import org.example.restfull_assigneetasks.repository.AssigneeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -49,4 +52,20 @@ public class AssigneeServiceImpl implements AssigneeService {
         }
         return false;
     }
+
+    @Override
+    public Optional<Assignee> partialUpdateAssignee(Long id, Assignee assignee) {
+        return assigneeRepository.findById(id)
+                .map(existingAssignee -> {
+                    if (assignee.getUsername() != null) {
+                        existingAssignee.setUsername(assignee.getUsername());
+                    }
+                    if (assignee.getPassword() != null) {
+                        existingAssignee.setPassword(assignee.getPassword());
+                    }
+                    return assigneeRepository.save(existingAssignee);
+                });
+    }
+
+
 }

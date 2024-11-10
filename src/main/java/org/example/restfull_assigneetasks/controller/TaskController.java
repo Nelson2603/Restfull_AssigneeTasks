@@ -31,7 +31,7 @@ public class TaskController {
         return ResponseEntity.ok(createdTask);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}")//полная замена
     ResponseEntity<Task> updateTask(@PathVariable long id, @RequestBody Task task) {  //для обновления существующей задачи.
         task.setId(id);
         Task updatedTask = taskService.updateTask(task);
@@ -47,4 +47,5 @@ public class TaskController {
         return ResponseEntity.noContent().build(); //noContent() - возвращает HTTP-ответ со статусом 204 No Content.
         // Этот статус означает, что запрос был успешно обработан, но в ответе не содержится данных.
     }
+
 }
