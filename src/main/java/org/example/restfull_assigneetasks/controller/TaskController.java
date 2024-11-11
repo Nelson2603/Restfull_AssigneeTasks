@@ -46,7 +46,7 @@ public class TaskController {
     @DeleteMapping("/{id}")   //для удаления задачи по ID.
     public ResponseEntity<Task> deleteTask(@PathVariable long id) {
         taskService.deleteTask(id);
-        return ResponseEntity.noContent().build(); //noContent() - возвращает HTTP-ответ со статусом 204 No Content.
+        return ResponseEntity.noContent().build(); // noContent() - возвращает HTTP-ответ со статусом 204 No Content.
         // Этот статус означает, что запрос был успешно обработан, но в ответе не содержится данных.
     }
 
