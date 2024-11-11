@@ -24,7 +24,7 @@ public class TaskController {
             return ResponseEntity.ok(task);
         } else {
             return ResponseEntity.notFound().build();
-        }
+        }//мой коммент
     }
 
     @PostMapping("/new") // для создания новой задачи.
@@ -47,7 +47,7 @@ public class TaskController {
     public ResponseEntity<Task> deleteTask(@PathVariable long id) {
         taskService.deleteTask(id);
         return ResponseEntity.noContent().build(); // noContent() - возвращает HTTP-ответ со статусом 204 No Content.
-        // Этот статус означает, что запрос был успешно обработан, но в ответе не содержится данных.
+        // Этот статус означает,что запрос был успешно обработан, но в ответе не содержится данных.
     }
 
     @PatchMapping("/{id}")
