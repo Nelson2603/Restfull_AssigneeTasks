@@ -36,4 +36,19 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.deleteById(id);
 
     }
+
+    @Override
+    public Optional<Task> partialUpdateTask(Long id, Task task) { //partialUpdate - частичный
+        //апдейт
+        return taskRepository.findById(id)
+                .map(taskExist -> {
+                    if (task.getName() != null) {
+                        taskExist.setName(task.getName());
+                    }
+                    if (task.getDescription() != null) {
+                        taskExist.setDescription(task.getDescription());
+                    }
+                    return taskRepository.save(taskExist);
+                });
+    }
 }
