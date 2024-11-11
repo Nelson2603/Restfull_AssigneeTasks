@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
@@ -46,5 +48,12 @@ public class TaskController {
         taskService.deleteTask(id);
         return ResponseEntity.noContent().build(); //noContent() - возвращает HTTP-ответ со статусом 204 No Content.
         // Этот статус означает, что запрос был успешно обработан, но в ответе не содержится данных.
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Task> partialUpdateTask(@PathVariable Long id, @RequestBody Task task) {
+        return taskService.partialUpdateTask(id, task)
+                .map(updatedTask -> ResponseEntity.ok().body(updatedTask))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
