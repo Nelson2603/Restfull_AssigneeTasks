@@ -2,6 +2,8 @@ package org.example.restfull_assigneetasks.service;
 
 import org.example.restfull_assigneetasks.model.entity.Task;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public interface TaskService {
@@ -14,4 +16,6 @@ public interface TaskService {
     void deleteTask(long id);
 
     Optional<Task> partialUpdateTask(Long id, Task task);
+
+    List<Task> findAllTask();
 }

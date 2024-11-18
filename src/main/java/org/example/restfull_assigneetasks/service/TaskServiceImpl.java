@@ -5,6 +5,7 @@ import org.example.restfull_assigneetasks.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,5 +51,10 @@ public class TaskServiceImpl implements TaskService {
                     }
                     return taskRepository.save(taskExist);
                 });
+    }
+
+    @Override
+    public List<Task> findAllTask() {
+        return taskRepository.findAll();
     }
 }

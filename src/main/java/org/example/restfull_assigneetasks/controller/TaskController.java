@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -16,6 +17,15 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
     private AssigneeService assigneeService;
+
+
+    @GetMapping
+    public List<Task> findAllTasks(@RequestParam(name = "date", required = false) String date) {
+        //в зависимости от date вернуть задачи пройденные или не пройденные или все задачи если date = null
+        return  taskService.findAllTask();
+
+    }
+
 
     @GetMapping("/{id}") //для получения задачи по ID.
     public ResponseEntity<Task> getTask(@PathVariable long id) {
